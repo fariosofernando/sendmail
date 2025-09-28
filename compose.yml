@@ -1,0 +1,13 @@
+services:
+  sendmail_app:
+    container_name: sendmail_app
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3015:3015"
+    env_file:
+      - ./.env
+    environment:
+      NODE_ENV: development
