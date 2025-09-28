@@ -35,6 +35,7 @@ export class TransactionRepository {
         "Customer Name",
         "Customer ID",
         "Loan ID",
+        "Deposito",
       ]);
 
       // 3. Linha de saldo inicial
@@ -71,6 +72,7 @@ export class TransactionRepository {
         transaction.customer_name ?? "N/A", // Customer Name
         transaction.customer_id ?? "N/A", // Customer ID
         transaction.loan_id ?? "N/A", // Loan ID
+        transaction.amount ?? "N/A", // Amount
       ]);
 
       // 5. Gera buffer do excel
