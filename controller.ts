@@ -10,29 +10,17 @@ export class TransactionController {
   }
 
   public send_report = async (req: Request, res: Response) => {
-    const { description, send_to } = req.body;
-    const files = req.files;
+    const { description, send_to, transaction } = req.body;
 
-    if (!description || !send_to) {
+    if (!description || !send_to || !transaction) {
       return res.status(400).json({ error: "Campos obrigatórios faltando." });
     }
 
-    if (!files || Object.keys(files).length === 0) {
-      return res.status(400).json({ message: "No file uploaded" });
-    }
-
     try {
-      const file = req.files.file as any;
-
-      if (!file) {
-        return res.status(400).json({ error: "Arquivo Excel é obrigatório." });
-      }
-
       const result = await this.transaction_repository.send_transaction_report({
         description,
-        excelBuffer: file.data,
-        filename: file.name,
-        send_to: send_to,
+        transaction,
+        send_to,
       });
 
       return res.status(201).json(result);
